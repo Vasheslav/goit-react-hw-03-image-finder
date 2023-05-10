@@ -1,23 +1,12 @@
-import * as basicLightbox from 'basiclightbox';
+import React, { Component } from 'react';
+import { Overley, Modal } from './Modal.styled';
 
-export const Modal = () => {
-  //   const [isOpen, setIsOpen] = useState(false);
-
-  const openModal = () => {
-    const instance = basicLightbox.create(
-      <div class="overlay">
-        <div class="modal">
-          <img src="" alt="" />
-        </div>
-      </div>
+export class ModalWindow extends Component {
+  render() {
+    return (
+      <Overley>
+        <Modal>{this.props.children}</Modal>
+      </Overley>
     );
-    // setIsOpen(true);
-    // instance.show();
-  };
-
-  return (
-    <div>
-      <button onClick={openModal}>Open Modal</button>
-    </div>
-  );
-};
+  }
+}

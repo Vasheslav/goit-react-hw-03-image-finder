@@ -37,6 +37,7 @@ export class ImageGallery extends Component {
             images: res.data.hits,
             status: 'resolved',
           });
+          console.log(res.data.hits);
         })
         .catch(error => messageError());
     }
@@ -96,6 +97,7 @@ export class ImageGallery extends Component {
               <ImageGalleryItem
                 key={item.id}
                 smollImg={item.webformatURL}
+                largeImg={item.largeImageURL}
                 tags={item.tags}
               />
             ))}
@@ -113,6 +115,7 @@ ImageGallery.propTypes = {
     PropTypes.exact({
       key: PropTypes.string.isRequired,
       smollImg: PropTypes.string.isRequired,
+      largeImg: PropTypes.string.isRequired,
       tags: PropTypes.string.isRequired,
     })
   ),
