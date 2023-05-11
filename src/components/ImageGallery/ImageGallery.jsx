@@ -19,11 +19,12 @@ export class ImageGallery extends Component {
     images: [],
     page: 1,
     status: 'idle',
+    showButton: 0,
   };
 
-  async componentDidUpdate(prevProps, _) {
+  async componentDidUpdate(prevProps, prevState) {
     if (prevProps.imageName !== this.props.imageName) {
-      this.setState({ page: 1, images: [], status: 'pending' });
+      await this.setState({ page: 1, images: [], status: 'pending' });
 
       axios
         .get(
@@ -36,8 +37,8 @@ export class ImageGallery extends Component {
           this.setState({
             images: res.data.hits,
             status: 'resolved',
+            showButton: res.data.hits.length >= 12,
           });
-          console.log(res.data.hits);
         })
         .catch(error => messageError());
     }
@@ -56,6 +57,7 @@ export class ImageGallery extends Component {
         this.setState(prevState => ({
           images: [...prevState.images, ...res.data.hits],
           status: 'resolved',
+          showButton: res.data.hits.length >= 12,
         }));
       })
       .catch(error => messageError());
@@ -102,7 +104,7 @@ export class ImageGallery extends Component {
               />
             ))}
           </Gallery>
-          {images.length < 12 ? null : <Button onCklick={this.onChangePage} />}
+          {this.state.showButton && <Button onCklick={this.onChangePage} />}
         </div>
       );
     }

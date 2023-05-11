@@ -17,10 +17,10 @@ export class ImageGalleryItem extends Component {
     return (
       <div>
         <Item>
-          <Img src={smollImg} alt={tags} />
+          <Img src={smollImg} alt={tags} onClick={this.toggleModal} />
         </Item>
         {this.state.showModal && (
-          <ModalWindow>
+          <ModalWindow onClose={this.toggleModal}>
             <img src={largeImg} alt={tags} />
           </ModalWindow>
         )}
@@ -28,21 +28,6 @@ export class ImageGalleryItem extends Component {
     );
   }
 }
-
-// export const ImageGalleryItem = ({ smollImg, largeImg, tags }) => {
-//   return (
-//     <div>
-//       <Item>
-//         <Img src={smollImg} alt={tags} />
-//       </Item>
-//       {showModal && (
-//         <ModalWindow>
-//           <img src={largeImg} alt={tags} />
-//         </ModalWindow>
-//       )}
-//     </div>
-//   );
-// };
 
 ImageGalleryItem.propTypes = {
   smollImg: PropTypes.string.isRequired,
