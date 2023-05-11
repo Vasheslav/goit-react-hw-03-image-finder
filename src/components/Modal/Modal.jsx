@@ -34,4 +34,5 @@ export class ModalWindow extends Component {
 
 ModalWindow.propTypes = {
   children: PropTypes.element.isRequired,
+  onClose: PropTypes.func.isRequired,
 };

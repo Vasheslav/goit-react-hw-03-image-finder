@@ -8,6 +8,7 @@ const inform = () => toast('Enter a value');
 export class Searchbar extends Component {
   state = {
     imagesName: '',
+    isButtonDisabled: false,
   };
 
   handleNameChange = ev => {
@@ -23,8 +24,14 @@ export class Searchbar extends Component {
     }
 
     this.props.onSubmit(this.state.imagesName);
-    this.setState({ imagesName: '' });
+    this.setState({ isButtonDisabled: true });
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.imagesName !== this.state.imagesName) {
+      this.setState({ isButtonDisabled: false });
+    }
+  }
 
   render() {
     return (
@@ -38,7 +45,7 @@ export class Searchbar extends Component {
             value={this.state.imagesName}
             onChange={this.handleNameChange}
           />
-          <Button type="submit">
+          <Button type="submit" disabled={this.state.isButtonDisabled}>
             <Label>Search</Label>
           </Button>
         </Form>
